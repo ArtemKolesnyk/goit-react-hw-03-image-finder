@@ -3,6 +3,7 @@ import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
 import { AppStyle } from './App.styled';
 import GlobalStyle from '../GlobalStyle';
+import Loader from './Loader';
 
 class App extends Component {
   state = {};
@@ -14,6 +15,7 @@ class App extends Component {
         <AppStyle>
           <Searchbar />
           <ImageGallery />
+          <Loader />
         </AppStyle>
       </>
     );
