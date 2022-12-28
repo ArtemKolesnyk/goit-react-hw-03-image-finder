@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const BtnSearch = styled.button`
+const BtnLoadMore = styled.button`
+  width: fit-content;
+  margin: auto;
   padding: 8px 16px;
   border-radius: 2px;
   background-color: #3f51b5;
@@ -25,4 +27,4 @@ const BtnSearch = styled.button`
   }
 `;
 
-export default BtnSearch;
+export { BtnLoadMore };

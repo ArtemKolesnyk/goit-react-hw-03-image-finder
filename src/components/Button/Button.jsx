@@ -1,11 +1,7 @@
-import BtnSearch from './Button.styled';
+import { BtnLoadMore } from './Button.styled';
 
 const Button = () => {
-  return (
-    <BtnSearch type="submit">
-      <span className="button-label">Search</span>
-    </BtnSearch>
-  );
+  return <BtnLoadMore type="submit">Load more</BtnLoadMore>;
 };
 
 export default Button;
