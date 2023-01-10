@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SearchbarHeader = styled.div`
+const SearchbarHeader = styled.header`
   top: 0;
   left: 0;
   position: sticky;
