@@ -8,6 +8,7 @@ import ImageGallery from './ImageGallery';
 import FetchImage from './Service/ApiPixabay';
 import Loader from './Loader';
 import Button from './Button';
+import ErrorBox from './ErrorBox';
 
 export const Status = {
   IDLE: 'idle',
@@ -31,24 +32,37 @@ class App extends Component {
     ) {
       this.setState({ status: Status.PENDING });
       FetchImage(this.state.desiredImage, this.state.page)
-        .then(hits => {
+        .then(({ total, hits }) => {
+          if (total === 0) {
+            this.setState({ status: Status.REJECTED });
+            return toast.error(
+              `Sorry, nothing not found ${this.state.desiredImage}`
+            );
+          }
+          this.setState({ status: Status.RESOLVED });
           this.setState(prevState => ({
             images: [...prevState.images, ...hits],
-            status: Status.RESOLVED,
           }));
-          return toast.info('success');
         })
-        .catch(error => this.setState({ error, status: Status.REJECTED }));
+        .catch(error => {
+          this.setState({ error, status: Status.REJECTED });
+        });
     }
   }
 
-  handleClick = () => {
-    this.setState({ page: this.state.page + 1 });
-    FetchImage(this.state.desiredImage, this.state.page + 1);
+  loadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
   };
 
-  handleFormSubmit = desiredImage => {
-    this.setState({ desiredImage });
+  handleFormSubmit = e => {
+    this.setState({
+      desiredImage: e,
+      images: [],
+      page: 1,
+      status: Status.IDLE,
+    });
   };
 
   render() {
@@ -65,7 +79,10 @@ class App extends Component {
           <Searchbar onSubmit={this.handleFormSubmit} />
           {status === 'pending' && <Loader />}
           <ImageGallery images={images} />
-          {status === 'resolved' && <Button onClick={this.handleClick} />}
+          {images !== [] && status === 'resolved' && (
+            <Button loadMore={this.loadMore} />
+          )}
+          {status === 'rejected' && <ErrorBox />}
         </AppStyle>
       </>
     );

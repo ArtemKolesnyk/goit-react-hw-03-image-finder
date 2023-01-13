@@ -13,9 +13,9 @@ const Overlay = styled.div`
   z-index: 1200;
 `;
 
-const ModalSerach = styled.div`
+const ModalImg = styled.div`
   max-width: calc(100vw - 48px);
   max-height: calc(100vh - 24px);
 `;
 
-export { Overlay, ModalSerach };
+export { Overlay, ModalImg };

@@ -1,22 +1,35 @@
-import PropTypes from 'prop-types';
+import Modal from 'components/Modal';
+import { Component } from 'react';
 import { GalleryItem, GalleryItemImage } from './ImageGalleryItem.styled';
 
-const ImageGalleryItem = ({ webformatURL, largeImageURL, tags }) => {
-  return (
-    <GalleryItem>
-      <GalleryItemImage
-        src={webformatURL}
-        data-source={largeImageURL}
-        alt={tags}
-      />
-    </GalleryItem>
-  );
-};
+class ImageGalleryItem extends Component {
+  state = {
+    isOpenModal: false,
+  };
 
-ImageGalleryItem.propTypes = {
-  webformatURL: PropTypes.string,
-  largeImageURL: PropTypes.string,
-  tags: PropTypes.string,
-};
+  hadleChange = () => {
+    this.setState(prevState => ({ isOpenModal: !prevState.isOpenModal }));
+  };
+
+  render() {
+    const { webformatURL, tags, largeImageURL } = this.props;
+    return (
+      <GalleryItem>
+        <GalleryItemImage
+          src={webformatURL}
+          alt={tags}
+          onClick={this.hadleChange}
+        />
+        {this.state.isOpenModal && (
+          <Modal
+            onClose={this.hadleChange}
+            largeImageURL={largeImageURL}
+            tags={tags}
+          />
+        )}
+      </GalleryItem>
+    );
+  }
+}
 
 export default ImageGalleryItem;
