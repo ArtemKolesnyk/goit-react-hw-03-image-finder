@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
-import FetchImage from './Service/ApiPixabay';
+import FetchImage from 'Service/ApiPixabay';
 import Loader from './Loader';
 import Button from './Button';
 import ErrorBox from './ErrorBox';
@@ -39,7 +39,9 @@ class App extends Component {
               `Sorry, nothing not found ${this.state.desiredImage}`
             );
           }
+
           this.setState({ status: Status.RESOLVED });
+
           this.setState(prevState => ({
             images: [...prevState.images, ...hits],
           }));

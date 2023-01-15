@@ -1,6 +1,3 @@
-import PropTypes from 'prop-types';
-// import { toast } from 'react-toastify';
-
 const BASE_URL = 'https://pixabay.com/api';
 const API_URL = '24263315-36ea98cb6d0ce52f0b1c6e073';
 
@@ -17,8 +14,4 @@ const FetchImage = (searchQuery, page) => {
   });
 };
 
-FetchImage.propTypes = {
-  searchQuery: PropTypes.string.isRequired,
-  page: PropTypes.number.isRequired,
-};
 export default FetchImage;
